@@ -1,16 +1,24 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
-import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SpeechLabContainer from './components/SpeechLabContainer';
+import CloneVoice from './components/CloneVoice';
 
 function App() {
 
   return (
+    <Router>
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center">
-      <SpeechLabContainer
-      />
+
+      <Routes>
+        <Route path="/" element={<SpeechLabContainer />} />
+        <Route path="/clone-voice" element={<CloneVoice />} />
+      </Routes>
+    
     </div>
+    </Router>
   );
 }
 
 export default App;
+

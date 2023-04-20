@@ -10,6 +10,7 @@ const AudioPlay = ({ audioSrc, title, language, onClose }) => {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
 
+
     useEffect(() => {
         setAudio(new Audio(audioSrc));
     }, [audioSrc]);
