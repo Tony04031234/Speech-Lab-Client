@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { faBackward } from "@fortawesome/free-solid-svg-icons";
+import { faForward } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const AudioPlay = ({ audioSrc, title, language, onClose }) => {
     const [audio, setAudio] = useState(null);
@@ -42,6 +45,10 @@ const AudioPlay = ({ audioSrc, title, language, onClose }) => {
         audio.currentTime = Math.max(audio.currentTime - 10, 0);
     };
 
+    const forward10Seconds = () => {
+        audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
+    }
+
     const updateProgress = () => {
         setCurrentTime(audio.currentTime);
         setProgress((audio.currentTime / audio.duration) * 100);
@@ -76,15 +83,21 @@ const AudioPlay = ({ audioSrc, title, language, onClose }) => {
           <div className="mt-4 flex flex-wrap md:flex-nowrap items-center justify-between">
             <button
               onClick={playAudio}
-              className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md mb-2 md:mb-0 mr-2"
+              className="px-3 py-2 bg-blue-500 text-white font-semibold rounded-md text-sm mb-1"
             >
               {playing ? "Pause" : "Play"}
             </button>
             <button
               onClick={rewind10Seconds}
-              className="px-4 py-2 bg-yellow-500 text-white font-semibold rounded-md mb-2 md:mb-0 mr-4"
+              className="text-gray-500  md:mb-0 mr-2 ml-2"
             >
-              Rewind
+               <FontAwesomeIcon icon={faBackward} className="mr-2" /> 
+            </button>
+            <button
+              onClick={forward10Seconds}
+              className="text-gray-500 md:mb-0 "
+            >
+               <FontAwesomeIcon icon={faForward} className="mr-2" /> 
             </button>
             <div className="text-sm text-gray-600 mb-2 md:mb-0">
               {formatTime(currentTime)}
@@ -101,7 +114,7 @@ const AudioPlay = ({ audioSrc, title, language, onClose }) => {
               {formatTime(duration)}
             </div>
             <button
-              className="px-4 py-2 bg-red-500 text-white font-semibold rounded-md"
+              className="px-3 py-2 bg-red-500 text-white font-semibold rounded-md mt-1 text-sm"
               onClick={handleClose}
             >
               Close
