@@ -1,12 +1,12 @@
 import React from 'react';
-import VoiceCloning from '../components/voice-clone';
+import VoiceClone from '../components/voice-clone';
 
 const Voice = () => {
   return (
     <div className="voice">
-      <VoiceCloning />
+      <VoiceClone />
     </div>
   );
 };
-
+ 
 export default Voice;
