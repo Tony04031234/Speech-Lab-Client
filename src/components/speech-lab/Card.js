@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AudioPlay from "./AudioPlay";
-import AddVoicePopup from "./AddVoicePopup";
+import AudioPlay from "./Audio";
+import AddVoicePopup from "./Popup";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { DummyAudioCall } from "../../api";
 

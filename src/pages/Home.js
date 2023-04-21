@@ -1,10 +1,10 @@
 import React from 'react';
-import SpeechLabContainer from '../components/speech-lab/SpeechLabContainer';
+import Container from '../components/speech-lab/main';
 
 const Home = () => {
   return (
     <div className="home">
-      <SpeechLabContainer />
+      <Container />
     </div>
   );
 };

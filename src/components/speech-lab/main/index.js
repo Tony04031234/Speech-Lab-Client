@@ -1,6 +1,6 @@
 import React from "react";
-import AudioPlay from "./AudioPlay";
-import SpeechLabCard from "./SpeechLabCard";
+import Audio from '../Audio';
+import Card from '../Card'
 
 const SpeechLabContainer = ({
   audioSrc,
@@ -12,11 +12,11 @@ const SpeechLabContainer = ({
   return (
     <div className="">
       <div className="col-span-1">
-        <SpeechLabCard />
+        <Card />
       </div>
       {showAudioPopup && (
         <div className="col-span-1">
-          <AudioPlay
+          <Audio
             audioSrc={audioSrc}
             title={title}
             language={language}

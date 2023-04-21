@@ -3,7 +3,7 @@ import VoiceCloning from '../components/voice-clone';
 
 const Voice = () => {
   return (
-    <div className="home">
+    <div className="voice">
       <VoiceCloning />
     </div>
   );
