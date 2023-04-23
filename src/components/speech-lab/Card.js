@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import AudioPlay from "./Audio";
 import AddVoicePopup from "./Popup";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { DummyAudioCall } from "../../api";
+import { generateAudio, fetchVoices } from "../../api";
 
 const SpeechLabCard = () => {
-  // Initialize languages and voices
   const languages = [
     { code: "en", name: "English" },
     { code: "vi", name: "Vietnamese" },
@@ -15,25 +14,17 @@ const SpeechLabCard = () => {
     { code: "fr", name: "French" },
   ];
 
-  const voices = [
-    { id: "premade-adam", name: "Premade/Adam" },
-    { id: "premade-john", name: "Premade/John" },
-    { id: "my-voice", name: "My Voice" },
-  ];
-
-  // State management
   const [showAddVoicePopup, setShowAddVoicePopup] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0].code);
-  const [selectedVoice, setSelectedVoice] = useState(voices[0].id);
+  const [voices, setVoices] = useState([]);
+  const [selectedVoice, setSelectedVoice] = useState(voices[0]);
   const [userText, setUserText] = useState("");
-  const [showAudioPopup, setShowAudioPopup] = useState(false);
   const [audioSrc, setAudioSrc] = useState("");
+  const [showAudioPopup, setShowAudioPopup] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  // Refs
   const dropdownRef = useRef(null);
 
-  // Event handlers
   const handleClickOutsideDropdown = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setShowDropdown(false);
@@ -46,6 +37,19 @@ const SpeechLabCard = () => {
       document.removeEventListener("mousedown", handleClickOutsideDropdown);
     };
   }, [dropdownRef]);
+
+  useEffect(() => {
+    const loadVoices = async () => {
+      try {
+        const fetchedVoices = await fetchVoices();
+        setVoices(fetchedVoices);
+      } catch (error) {
+        console.error("Error fetching voices:", error);
+      }
+    };
+
+    loadVoices();
+  }, []);
 
   const handleAddVoiceClick = (event) => {
     event.preventDefault();
@@ -60,16 +64,27 @@ const SpeechLabCard = () => {
     setShowDropdown(!showDropdown);
   };
 
-  const handleCloneVoiceClick = () => {
-    // Implement your clone voice functionality here
+  const handleGenerate = async () => {
+    try {
+      const clipParams = {
+        title: 'New Clip',
+        body: userText,
+        voice_uuid: selectedVoice,
+        is_public: false,
+        is_archived: false,
+        callback_uri: 'http://localhost:8080/api/audio/callback',
+      };
+
+      const generatedAudioUrl = await generateAudio(clipParams);
+      setAudioSrc(generatedAudioUrl);
+      setShowAudioPopup(true);
+    } catch (error) {
+      console.error("Error generating audio:", error);
+    }
   };
 
-
-  const handleGenerate = async () => {
-    // Call the DummyAudio function from api/index.js
-    const generatedAudioSrc = await DummyAudioCall();
-    setAudioSrc(generatedAudioSrc);
-    setShowAudioPopup(true);
+  const handleCloneVoiceClick = () => {
+    // Implement your clone voice functionality here
   };
 
   return (
@@ -86,7 +101,7 @@ const SpeechLabCard = () => {
               className="block w-full p-2 border border-blue-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 mr-4"
             >
               {voices.map((voice) => (
-                <option key={voice.id} value={voice.id}>
+                <option key={voice.uuid} value={voice.uuid}>
                   {voice.name}
                 </option>
               ))}
