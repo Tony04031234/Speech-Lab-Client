@@ -10,7 +10,7 @@ We love your input! We want to make contributing to this project as easy and tra
 ## We Develop with Github
 We use Github to host code, to track issues and feature requests, as well as accept pull requests.
 
-## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
+## We Use [Github Flow](https://docs.github.com/en/get-started/quickstart/github-flow), So All Code Changes Happen Through Pull Requests
 Pull requests are the best way to propose changes to the codebase. We actively welcome your pull requests:
 
 1. Fork the repo and create your branch from `master`.
@@ -23,8 +23,9 @@ Pull requests are the best way to propose changes to the codebase. We actively w
 ## Any contributions you make will be under the MIT Software License
 In short, when you submit code changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers the project. Feel free to contact the maintainers if that's a concern.
 
-## Report bugs using Github's [issues](https://github.com/briandk/transcriptase-atom/issues)
+## Report bugs using Github's [issues](https://github.com/Tony04031234/Speech-Lab-Client/issues)
 We use GitHub issues to track public bugs. Report a bug by opening a new issue; it's that easy!
+
 
 ## Write bug reports with detail, background, and sample code
 Great Bug Reports tend to have:
